@@ -5,18 +5,26 @@
             'width': width,
             'height': height
         }">
-        <check-item
-            :childrenName="childrenName"
-            :idName="idName"
-            :labelName="labelName"
-            :isRadio="isRadio"
-            :isCheckbox="isCheckbox"
-            :disabled="disabled"
-            v-for="(row,i) in rebuildList"
-            :key="i"
-            :row="row"
-            :level="0">
-        </check-item>
+        <template v-if="list.length">
+            <check-item
+                :childrenName="childrenName"
+                :idName="idName"
+                :labelName="labelName"
+                :isRadio="isRadio"
+                :isCheckbox="isCheckbox"
+                :disabled="disabled"
+                v-for="(row,i) in rebuildList"
+                :key="i"
+                :row="row"
+                :level="0">
+            </check-item>
+        </template>
+        <template v-else>
+            <div class="footer">
+                暂无数据
+            </div>
+        </template>
+
     </div>
 </template>
 
@@ -112,6 +120,15 @@ export default {
 .tree {
     overflow-y: auto;
     user-select: none;
+}
+.footer {
+    height: 50px;
+    color: #36AEFF;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 ::-webkit-scrollbar {/* 滚动条滑块大小 */
