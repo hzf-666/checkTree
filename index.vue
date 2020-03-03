@@ -99,12 +99,19 @@ export default {
                     item[this.childrenName] = item[this.childrenName] || [];
                     item.isExpand = item.isExpand || false;
                     this.initList.includes(item[this.idName]) ? item.isChecked = true : item.isChecked = false;
-                    // item.isChecked = item.isChecked || false;
                 },this.childrenName);
                 this.rebuildList = tmp;
             },
             deep: true,
             immediate: true
+        },
+        initList: {
+            handler: function(n,o) {
+                filterTreeData(this.rebuildList,item => {
+                    n.includes(item[this.idName]) ? item.isChecked = true : item.isChecked = false;
+                },this.childrenName)
+            },
+            deep: true
         }
     },
     methods: {
@@ -120,6 +127,7 @@ export default {
 .tree {
     overflow-y: auto;
     user-select: none;
+    /* border: 1px solid #ddd; */
 }
 .footer {
     height: 50px;
